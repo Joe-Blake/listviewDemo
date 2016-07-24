@@ -21,8 +21,9 @@ import java.util.List;
 
 public class MainActivity extends Activity{
 
-    ListView mlistView;
+    private ListView mlistView;
     private static String newsURL = "http://www.imooc.com/api/teacher?type=4&num=30";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +45,13 @@ public class MainActivity extends Activity{
         @Override
         protected void onPostExecute(List<NewsBean> newsBeans) {
             super.onPostExecute(newsBeans);
-            NewsAdapter adapter = new NewsAdapter(MainActivity.this, newsBeans);
+            NewsAdapter adapter = new NewsAdapter(MainActivity.this, newsBeans, mlistView);
             mlistView.setAdapter(adapter);
         }
     }
 
     /*
-    *将url中的json数据转换为自定义的NewsBean
+    *将url中的json数据转换为自定义的NewsBean,返回数据List
     * */
     private List<NewsBean> getJsonData(String url) {
         List<NewsBean> newsBeanList = new ArrayList<>();
